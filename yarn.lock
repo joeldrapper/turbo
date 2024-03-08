@@ -1865,10 +1865,6 @@ iconv-lite@0.4.24:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-"idiomorph@https://github.com/bigskysoftware/idiomorph.git":
-  version "0.3.0"
-  resolved "https://github.com/bigskysoftware/idiomorph.git#b5115add9f7ab04c04af0624385540dff04e0735"
-
 ieee754@^1.1.13:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
@@ -2334,6 +2330,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+morphlex@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/morphlex/-/morphlex-0.0.13.tgz#5a2d01b33f16b942c09799b141ef4ec0be45cb9c"
+  integrity sha512-gfJfBNtBfz/3IVc0rOXx5dkgXHnJPykua55wuH2Qg4UtWvcZB0dCbSvibgi+iqmT5hlccR8+xECofvzYwjWN/g==
 
 ms@2.0.0:
   version "2.0.0"

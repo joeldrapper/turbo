@@ -1,4 +1,4 @@
-import { Idiomorph } from "idiomorph/dist/idiomorph.esm.js"
+import { morph } from "morphlex"
 import { dispatch } from "../../util"
 import { PageRenderer } from "./page_renderer"
 
@@ -28,15 +28,12 @@ export class MorphRenderer extends PageRenderer {
   #morphElements(currentElement, newElement, morphStyle = "outerHTML") {
     this.isMorphingTurboFrame = this.#isFrameReloadedWithMorph(currentElement)
 
-    Idiomorph.morph(currentElement, newElement, {
-      morphStyle: morphStyle,
-      callbacks: {
-        beforeNodeAdded: this.#shouldAddElement,
-        beforeNodeMorphed: this.#shouldMorphElement,
-        beforeAttributeUpdated: this.#shouldUpdateAttribute,
-        beforeNodeRemoved: this.#shouldRemoveElement,
-        afterNodeMorphed: this.#didMorphElement
-      }
+    morph(currentElement, newElement, {
+      beforeNodeAdded: this.#shouldAddElement.bind(this),
+      beforeNodeMorphed: this.#shouldMorphElement.bind(this),
+      beforeNodeRemoved: this.#shouldRemoveElement.bind(this),
+      afterNodeMorphed: this.#didMorphElement.bind(this),
+      beforeAttributeUpdated: this.#shouldUpdateAttribute.bind(this),
     })
   }
 
@@ -62,8 +59,13 @@ export class MorphRenderer extends PageRenderer {
     }
   }
 
-  #shouldUpdateAttribute = (attributeName, target, mutationType) => {
-    const event = dispatch("turbo:before-morph-attribute", { cancelable: true, target, detail: { attributeName, mutationType } })
+  #shouldUpdateAttribute = (attributeName, target, newValue) => {
+    const mutationType = newValue ? "updated" : "removed"
+    const event = dispatch("turbo:before-morph-attribute", {
+      cancelable: true,
+      target,
+      detail: { attributeName, mutationType },
+    })
 
     return !event.defaultPrevented
   }
